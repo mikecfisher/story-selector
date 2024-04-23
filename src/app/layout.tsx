@@ -1,8 +1,20 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import localFont from "next/font/local";
+
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const gtText = localFont({
+  src: "../../public/fonts/GT-Super-Text-Regular.woff2",
+  variable: "--font-gt-text",
+});
+const gtDisplay = localFont({
+  src: "../../public/fonts/GT-Super-Display-Regular.woff2",
+  variable: "--font-gt-display",
+});
+const gtAmerica = localFont({
+  src: "../../public/fonts/GT-America-Standard-Medium.woff2",
+  variable: "--font-gt-america",
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -15,8 +27,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html
+      lang="en"
+      className={`${gtText.variable} ${gtDisplay.variable} ${gtAmerica.variable}`}
+    >
+      <body>{children}</body>
     </html>
   );
 }
