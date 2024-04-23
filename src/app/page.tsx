@@ -4,14 +4,14 @@ import { useState } from "react";
 
 const topicOptions = [
   { name: "Travel & Adventure" },
-  { name: "College" },
-  { name: "Parenthood" },
-  { name: "Hobbies" },
-  { name: "Childhood" },
   { name: "Love" },
+  { name: "College" },
   { name: "Friendships" },
+  { name: "Parenthood" },
   { name: "Work life" },
+  { name: "Hobbies" },
   { name: "Spirituality & faith" },
+  { name: "Childhood" },
   { name: "Challenges" },
 ];
 
@@ -32,36 +32,40 @@ export default function Home() {
   };
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-6 font-gt-super-text bg-white">
+    <main className="flex min-h-screen flex-col items-center p-6 font-gt-super-text bg-white max-w-screen-md mx-auto">
       <Image
         src="/storyworth-logo.png"
         alt="plus icon"
         width={162}
         height={114}
       />{" "}
-      <h1 className=" text-emerald-950 text-4xl font-gt-super-display my-5">
+      <h1 className=" text-emerald-950 text-4xl font-gt-super-display my-5 max-w-96 md:max-w-full">
         Tell us about yourself so we can personalize your experience
       </h1>
-      <div className="flex flex-col my-6 w-full items-center">
-        <p className="leading-tight text-emerald-900">
+      <div className="mt-4 w-full flex flex-col items-center md:items-start">
+        <p className="leading-tight text-emerald-900 mb-2">
           List the places you&apos;ve lived
         </p>
-        {places.map((place, index) => (
-          <input
-            key={index}
-            type="text"
-            value={place}
-            onChange={(event) => handlePlaceChange(index, event)}
-            className="w-full max-w-96 p-2 border border-gray-400 rounded-lg my-2"
-          />
-        ))}
+
+        <div className="space-y-3">
+          {places.map((place, index) => (
+            <input
+              key={index}
+              type="text"
+              value={place}
+              onChange={(event) => handlePlaceChange(index, event)}
+              className="w-full md:max-w-96 px-2 py-3 border border-gray-400 rounded-lg "
+            />
+          ))}
+        </div>
+
         <button
           onClick={handleAddPlace}
-          className="flex py-2 text-teal-700 font-gt-america"
+          className="flex py-2 text-teal-700 font-gt-america tracking-widest mt-4"
         >
           <Image
             src="/plus-circle.svg"
-            className="mr-1"
+            className="mr-1 "
             alt="plus icon"
             width={24}
             height={24}
@@ -69,15 +73,15 @@ export default function Home() {
           ADD A NEW PLACE
         </button>
       </div>
-      <div className="mt-3">
-        <p className="font-gt-super-text leading-tight">
+      <div className="mt-12 w-full">
+        <p className="font-gt-super-text leading-tight mb-2 text-green-900">
           Select topics below that you’re interested in exploring
         </p>
-        <div>
+        <div className="grid md:grid-cols-2 gap-y-4 w-full">
           {topicOptions.map((topic) => (
             <div
               key={topic.name}
-              className="space-x-2 border max-w-96 border-gray-400 rounded-lg p-2 my-3 flex items-center"
+              className="md:max-w-[338px] space-x-2  border flex-grow  border-gray-400 rounded-lg py-2 px-4 flex items-center"
             >
               <input
                 className="size-5 rounded-sm border accent-cyan-700"
@@ -95,8 +99,8 @@ export default function Home() {
           ))}
         </div>
       </div>
-      <div>
-        <button className=" mt-3 w-full font-gt-america uppercase bg-cyan-700 rounded-3xl text-white px-12 py-3">
+      <div className="mt-7 flex justify-center md:justify-start w-full px-5 md:px-0">
+        <button className="font-gt-america max-w-96 uppercase bg-[#068089] rounded-3xl text-white px-12 py-3 text-center md:text-left w-full md:w-auto">
           Next
         </button>
       </div>

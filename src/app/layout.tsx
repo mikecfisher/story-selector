@@ -31,7 +31,7 @@ export default function RootLayout({
       lang="en"
       className={`${gtText.variable} ${gtDisplay.variable} ${gtAmerica.variable}`}
     >
-      <body>{children}</body>
+      <body className="bg-white">{children}</body>
     </html>
   );
 }
