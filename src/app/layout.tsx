@@ -4,7 +4,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 
 const gtText = localFont({
-  src: "../../public/fonts/GT-Super-Text-Regular.woff2",
+  src: "../../public/fonts/GT-Super-Text-Book.woff2",
   variable: "--font-gt-text",
 });
 const gtDisplay = localFont({
