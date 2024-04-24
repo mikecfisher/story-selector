@@ -1,10 +1,13 @@
 "use client";
 import Image from "next/image";
-import { useState } from "react";
+
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormSchema, schema } from "./formSchema";
 import { useFieldArray, useForm } from "react-hook-form";
 import { topicOptions } from "./formSchema";
+
+import { onSubmitAction } from "./formSubmit";
+import { z } from "zod";
 
 export default function Home() {
   const {
@@ -24,8 +27,11 @@ export default function Home() {
     control,
   });
 
-  const handleSubmitFunc = (data: any) => {
-    console.log("wonk", data);
+  const onSubmit = async (data: z.output<typeof schema>) => {
+    const formData = new FormData();
+    formData.append("placesLived", JSON.stringify(data.placesLived));
+    formData.append("topics", JSON.stringify(data.topics));
+    console.log(await onSubmitAction(formData));
   };
 
   const handleAddField = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -41,7 +47,7 @@ export default function Home() {
         width={162}
         height={114}
       />{" "}
-      <form onSubmit={handleSubmit(handleSubmitFunc)}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <h1 className=" text-emerald-950 text-4xl font-gt-super-display my-5 max-w-96 md:max-w-full">
           Tell us about yourself so we can personalize your experience
         </h1>
