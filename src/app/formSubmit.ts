@@ -28,5 +28,17 @@ export async function onSubmitAction(data: FormData): Promise<FormState> {
     };
   }
 
+  const flatPlaces = parsed.data.placesLived
+    .map((place) => place.value)
+    .filter((place) => place?.trim() !== "")
+    .join(", ");
+
+  const flatInterests = Object.entries(parsed.data.topics)
+    .filter(([topic, isSelected]) => isSelected)
+    .map(([topic, isSelected]) => topic)
+    .join(", ");
+
+  console.log("flatdata", flatPlaces, flatInterests);
+
   return { message: "User registered" };
 }
