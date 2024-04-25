@@ -20,7 +20,7 @@ Then, install the project dependencies:
 pnpm install
 ```
 
-Next, run the development server:
+Next, run the development server :
 
 ```bash
 pnpm dev
