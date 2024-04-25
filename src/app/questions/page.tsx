@@ -1,10 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { onSubmitAction } from "../formSubmit";
+import { onSubmitAction } from "../personalization-form/formSubmit";
 import { useSearchParams, useRouter } from "next/navigation";
-import { FormSchema } from "../formSchema";
+import { FormSchema } from "../personalization-form/formSchema";
 import { Skeleton } from "@/components/ui/skeleton";
+import Link from "next/link";
 
 const QuestionsPage = () => {
   // const [questions, setQuestions] = useState<string[]>([
@@ -14,6 +15,8 @@ const QuestionsPage = () => {
   //   "In what ways has your pursuit of adventure been influenced by your academic journey? ",
   //   "Can you share a particularly memorable adventure or travel story from one of these locations?",
   // ]);
+
+  const router = useRouter();
 
   const [questions, setQuestions] = useState<string[]>(["", "", ""]);
 
@@ -81,13 +84,19 @@ const QuestionsPage = () => {
 
         <textarea className="border w-full h-32 rounded-lg focus:border-[#068089] focus:outline-none" />
 
-        <div className="mt-7 flex justify-center md:justify-start w-full px-5 md:px-0">
+        <div className="mt-7 flex justify-center md:justify-start w-full px-5 md:px-0 space-x-5">
           <button
             type="submit"
             className="font-gt-america max-w-96 uppercase bg-[#068089] rounded-3xl text-white px-12 py-3 text-center md:text-left w-full md:w-auto"
           >
             Submit
           </button>
+          <Link
+            href="/"
+            className="font-gt-america max-w-96 uppercase border border-[#068089] rounded-3xl text-gray-500 px-12 py-3 text-center md:text-left w-full md:w-auto"
+          >
+            Back
+          </Link>
         </div>
       </form>
     </main>
