@@ -8,6 +8,8 @@ import { topicOptions } from "./formSchema";
 
 import { onSubmitAction } from "./formSubmit";
 import { z } from "zod";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useCallback } from "react";
 
 export default function Home() {
   const {
@@ -27,11 +29,23 @@ export default function Home() {
     control,
   });
 
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const createQueryString = useCallback(
+    (name: string, value: string) => {
+      const params = new URLSearchParams(searchParams.toString());
+      params.set(name, value);
+
+      return params.toString();
+    },
+    [searchParams]
+  );
+
   const onSubmit = async (data: z.output<typeof schema>) => {
-    const formData = new FormData();
-    formData.append("placesLived", JSON.stringify(data.placesLived));
-    formData.append("topics", JSON.stringify(data.topics));
-    console.log(await onSubmitAction(formData));
+    router.push(
+      "/questions" + "?" + createQueryString("info", JSON.stringify(data))
+    );
   };
 
   const handleAddField = (e: React.MouseEvent<HTMLButtonElement>) => {

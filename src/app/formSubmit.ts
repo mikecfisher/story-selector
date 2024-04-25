@@ -1,44 +1,41 @@
 "use server";
 
-import { schema } from "./formSchema";
+import { FormSchema, schema } from "./formSchema";
+import { generateQuestions } from "./llm-question-generator";
 
 export type FormState = {
-  message: string;
-  fields?: Record<string, string>;
-  issues?: string[];
+  message?: string | undefined;
+  data: string[] | undefined;
 };
 
-export async function onSubmitAction(data: FormData): Promise<FormState> {
-  const formData = Object.fromEntries(data);
+type QuestionResponse = string[];
 
-  formData.placesLived = JSON.parse(formData.placesLived as string);
-  formData.topics = JSON.parse(formData.topics as string);
-
-  const parsed = schema.safeParse(formData);
+export async function onSubmitAction(
+  data: FormSchema
+): Promise<QuestionResponse | undefined> {
+  const parsed = schema.safeParse(data);
 
   if (!parsed.success) {
-    const fields: Record<string, string> = {};
-    for (const key of Object.keys(formData)) {
-      fields[key] = formData[key].toString();
-    }
-    return {
-      message: "Invalid form data",
-      fields,
-      issues: parsed.error.issues.map((issue) => issue.message),
-    };
+    //error
   }
 
-  const flatPlaces = parsed.data.placesLived
-    .map((place) => place.value)
-    .filter((place) => place?.trim() !== "")
-    .join(", ");
+  const flatPlaces =
+    parsed.data?.placesLived
+      .map((place) => place.value)
+      .filter((place) => place?.trim() !== "")
+      .join(", ") || "";
 
-  const flatInterests = Object.entries(parsed.data.topics)
+  const flatInterests = Object.entries(parsed.data?.topics || {})
     .filter(([topic, isSelected]) => isSelected)
     .map(([topic, isSelected]) => topic)
     .join(", ");
 
-  console.log("flatdata", flatPlaces, flatInterests);
+  console.log(flatPlaces, flatInterests);
 
-  return { message: "User registered" };
+  const response = await generateQuestions({
+    placesLived: flatPlaces,
+    interests: flatInterests,
+  });
+
+  return response;
 }
