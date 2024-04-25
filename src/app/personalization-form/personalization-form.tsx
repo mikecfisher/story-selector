@@ -3,6 +3,7 @@ import React from "react";
 import { topicOptions } from "./formSchema";
 import Image from "next/image";
 import { usePersonalizationForm } from "./use-personalization-form";
+import { Button } from "@/components/ui/button";
 
 const PersonalizationForm: React.FC = () => {
   const { register, handleSubmit, errors, fields, onSubmit, handleAddField } =
@@ -72,12 +73,7 @@ const PersonalizationForm: React.FC = () => {
           </div>
         </div>
         <div className="mt-7 flex justify-center md:justify-start w-full px-5 md:px-0">
-          <button
-            type="submit"
-            className="font-gt-america max-w-96 uppercase bg-[#068089] rounded-3xl text-white px-12 py-3 text-center md:text-left w-full md:w-auto"
-          >
-            Next
-          </button>
+          <Button type="submit">Next</Button>
         </div>
       </form>
     </div>
