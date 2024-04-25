@@ -4,6 +4,7 @@ import { topicOptions } from "./formSchema";
 import Image from "next/image";
 import { usePersonalizationForm } from "./use-personalization-form";
 import { Button } from "@/components/ui/button";
+import Topic from "./topic";
 
 const PersonalizationForm: React.FC = () => {
   const { register, handleSubmit, errors, fields, onSubmit, handleAddField } =
@@ -29,19 +30,22 @@ const PersonalizationForm: React.FC = () => {
             ))}
             <p className="text-red-400">{errors.placesLived?.root?.message}</p>
           </div>
-          <button
-            onClick={(e) => handleAddField(e)}
-            className="flex py-2 text-teal-700 font-gt-america tracking-widest mt-4"
+          <Button
+            variant="text"
+            size="text"
+            type="button"
+            onClick={handleAddField}
+            className="mt-4"
           >
             <Image
               src="/plus-circle.svg"
-              className="mr-1 "
+              className="mr-1"
               alt="plus icon"
               width={24}
               height={24}
             />{" "}
             ADD A NEW PLACE
-          </button>
+          </Button>
         </div>
         <div className="mt-12 w-full">
           <p className="font-gt-super-text leading-tight mb-2 text-green-900">
@@ -49,23 +53,7 @@ const PersonalizationForm: React.FC = () => {
           </p>
           <div className="grid md:grid-cols-2 gap-y-4 w-full">
             {topicOptions.map((topic) => (
-              <div
-                key={topic.name}
-                className="md:max-w-[338px] space-x-2  border flex-grow  border-gray-400 rounded-lg py-2 px-4 flex items-center"
-              >
-                <input
-                  id={topic.name}
-                  className="size-5 rounded-sm border accent-cyan-700"
-                  type="checkbox"
-                  {...register(`topics.${topic.name}`)}
-                />
-                <label
-                  className="font-gt-super-text leading-7 text-xl text-emerald-950"
-                  htmlFor={topic.name}
-                >
-                  {topic.name}
-                </label>
-              </div>
+              <Topic key={topic.name} topic={topic} register={register} />
             ))}
             <p className="text-red-400">
               {errors.topics?.root?.message as string}
