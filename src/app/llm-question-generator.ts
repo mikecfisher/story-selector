@@ -22,7 +22,7 @@ export async function generateQuestions(questionData: LLMQuestionData) {
         3 to 5 questions that will help the user write about themselves. Again The Topics and Locations may not directly relate to each other.
         Example: Just because someone wants to talk about college and they have lived in NYC doesn't mean they went to college in NYC
 
-        Please keep the length of the questions to no more than 500 characters.
+        Please keep the length of the questions to no more than 250 characters.
         Do not number questions, Format questions like this: What was it like living in NYC?`,
       },
       {
@@ -31,6 +31,8 @@ export async function generateQuestions(questionData: LLMQuestionData) {
       },
     ],
   });
+
+  console.log("server call");
 
   return response.choices[0].message.content
     ?.split("\n")

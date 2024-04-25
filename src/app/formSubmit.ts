@@ -30,8 +30,6 @@ export async function onSubmitAction(
     .map(([topic, isSelected]) => topic)
     .join(", ");
 
-  console.log(flatPlaces, flatInterests);
-
   const response = await generateQuestions({
     placesLived: flatPlaces,
     interests: flatInterests,
