@@ -9,26 +9,24 @@ type LLMQuestionData = {
 
 export async function generateQuestions(questionData: LLMQuestionData) {
   try {
-    const prompt = `I have lived in ${questionData.placesLived} and I am interested in talking about ${questionData.interests}.`;
+    const systemPrompt = `Based on the following details about the user, 
+    generate 3 insightful questions to aid in writing an emotional and heartfelt autobiography. 
+    The user has lived in ${questionData.placesLived}. They are interested in discussing topics such as ${questionData.interests}. 
+    Note: The places lived and interests may not be directly related. 
+    Avoid simple or direct associations like assuming educational events based on the location unless specified by the user.
+    Keep question length to 250 characters or less
+    `;
 
     const response = await openai.chat.completions.create({
       model: "gpt-3.5-turbo",
       messages: [
         {
           role: "system",
-          content: `Act as a master writer of biographies, 
-        You are helping someone write an emotional and heartfelt autobiography.
-        The user is going to list a few places where they have lived 
-        and a few topics they are interested in talking about. Interests and places they have lived are not always related to each other. Use these locations and topics to generate
-        3 to 5 questions that will help the user write about themselves. Again The Topics and Locations may not directly relate to each other.
-        Example: Just because someone wants to talk about college and they have lived in NYC doesn't mean they went to college in NYC
-
-        Please keep the length of the questions to no more than 250 characters.
-        Do not number questions, Format questions like this: What was it like living in NYC?`,
+          content: systemPrompt,
         },
         {
           role: "user",
-          content: prompt,
+          content: "please generate some questions for me.",
         },
       ],
     });

@@ -45,8 +45,9 @@ const QuestionsPage = () => {
           Enter your question
         </label>
         <textarea
+          placeholder="What would you like to say?"
           id="questionInput"
-          className="border w-full h-32 rounded-lg focus:border-[#068089] focus:outline-none"
+          className="border w-full h-32 rounded-lg p-4 focus:border-[#068089] focus:outline-none"
         />
 
         <div className="mt-7 flex justify-center md:justify-start w-full px-5 md:px-0 space-x-5">
