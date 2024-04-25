@@ -29,6 +29,8 @@ export const QuestionItem: React.FC<QuestionItemProps> = ({
 }) => {
   return (
     <div
+      role="button"
+      tabIndex={0}
       className={`border rounded-md p-5 h-56 w-52 cursor-pointer overflow-hidden 
         ${selectedQuestion === index ? " border-[#068089]" : ""}
       }`}

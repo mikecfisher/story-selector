@@ -6,8 +6,17 @@ import { QuestionItem, QuestionLoading } from "./question-item";
 import { Button } from "@/components/ui/button";
 
 const QuestionsPage = () => {
-  const { questions, isLoading, selectedQuestion, handleQuestionSelect } =
-    useQuestionsPage();
+  const {
+    questions,
+    isLoading,
+    selectedQuestion,
+    handleQuestionSelect,
+    error,
+  } = useQuestionsPage();
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-start space-y-14 p-6 font-gt-super-text bg-white max-w-screen-md mx-auto">
@@ -32,7 +41,13 @@ const QuestionsPage = () => {
           })}
         </div>
 
-        <textarea className="border w-full h-32 rounded-lg focus:border-[#068089] focus:outline-none" />
+        <label htmlFor="questionInput" className="sr-only">
+          Enter your question
+        </label>
+        <textarea
+          id="questionInput"
+          className="border w-full h-32 rounded-lg focus:border-[#068089] focus:outline-none"
+        />
 
         <div className="mt-7 flex justify-center md:justify-start w-full px-5 md:px-0 space-x-5">
           <Button type="submit">Submit</Button>
