@@ -25,7 +25,7 @@ export const schema = z.object({
       (data) => data.some((place) => place.value && place.value.length >= 3),
       {
         message: "Please enter at least one place you have lived",
-        path: [], // apply error at root of the array
+        path: [],
       }
     ),
 

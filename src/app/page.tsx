@@ -3,7 +3,7 @@ import PersonalizationForm from "./personalization-form/personalization-form";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center p-6 font-gt-super-text bg-white max-w-screen-md mx-auto">
+    <main className="flex min-h-screen flex-col items-center p-6 font-gt-super-text max-w-screen-md mx-auto">
       <Image
         src="/storyworth-logo.png"
         alt="plus icon"

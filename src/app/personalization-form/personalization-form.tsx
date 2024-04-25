@@ -1,18 +1,10 @@
 "use client";
-import React, { useCallback } from "react";
-import { useFieldArray, useForm } from "react-hook-form";
-import { FormSchema, schema, topicOptions } from "./formSchema";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useRouter, useSearchParams } from "next/navigation";
+import React from "react";
+import { topicOptions } from "./formSchema";
 import Image from "next/image";
-import { z } from "zod";
 import { usePersonalizationForm } from "./use-personalization-form";
 
-interface Props {
-  // Define your component's props here
-}
-
-const PersonalizationForm: React.FC<Props> = (props) => {
+const PersonalizationForm: React.FC = () => {
   const { register, handleSubmit, errors, fields, onSubmit, handleAddField } =
     usePersonalizationForm();
 

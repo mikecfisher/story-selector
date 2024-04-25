@@ -1,7 +1,7 @@
 "use server";
 
-import { FormSchema, schema } from "./formSchema";
-import { generateQuestions } from "../questions/llm-question-generator";
+import { FormSchema, schema } from "../personalization-form/formSchema";
+import { generateQuestions } from "./llm-question-generator";
 
 export type FormState = {
   message?: string | undefined;
