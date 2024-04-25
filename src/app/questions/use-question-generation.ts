@@ -7,6 +7,7 @@ export function useQuestionsPage() {
   const [questions, setQuestions] = useState<string[]>(["", "", ""]);
   const [isLoading, setIsLoading] = useState(true);
   const [selectedQuestion, setSelectedQuestion] = useState<number>();
+  const [error, setError] = useState<string | null>(null);
   const searchParams = useSearchParams();
 
   useEffect(() => {
@@ -20,6 +21,8 @@ export function useQuestionsPage() {
       if (returnedQuestions) {
         setQuestions(returnedQuestions);
         setIsLoading(false);
+      } else {
+        setError("Failed to fetch questions");
       }
     };
 
@@ -31,6 +34,7 @@ export function useQuestionsPage() {
   };
 
   return {
+    error,
     questions,
     isLoading,
     selectedQuestion,

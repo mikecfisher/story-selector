@@ -8,14 +8,15 @@ type LLMQuestionData = {
 };
 
 export async function generateQuestions(questionData: LLMQuestionData) {
-  const prompt = `I have lived in ${questionData.placesLived} and I am interested in talking about ${questionData.interests}.`;
+  try {
+    const prompt = `I have lived in ${questionData.placesLived} and I am interested in talking about ${questionData.interests}.`;
 
-  const response = await openai.chat.completions.create({
-    model: "gpt-3.5-turbo",
-    messages: [
-      {
-        role: "system",
-        content: `Act as a master writer of biographies, 
+    const response = await openai.chat.completions.create({
+      model: "gpt-3.5-turbo",
+      messages: [
+        {
+          role: "system",
+          content: `Act as a master writer of biographies, 
         You are helping someone write an emotional and heartfelt autobiography.
         The user is going to list a few places where they have lived 
         and a few topics they are interested in talking about. Interests and places they have lived are not always related to each other. Use these locations and topics to generate
@@ -24,17 +25,19 @@ export async function generateQuestions(questionData: LLMQuestionData) {
 
         Please keep the length of the questions to no more than 250 characters.
         Do not number questions, Format questions like this: What was it like living in NYC?`,
-      },
-      {
-        role: "user",
-        content: prompt,
-      },
-    ],
-  });
+        },
+        {
+          role: "user",
+          content: prompt,
+        },
+      ],
+    });
 
-  console.log("server call");
-
-  return response.choices[0].message.content
-    ?.split("\n")
-    .filter((item) => item.trim() !== "");
+    return response.choices[0].message.content
+      ?.split("\n")
+      .filter((item) => item.trim() !== "");
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
 }
