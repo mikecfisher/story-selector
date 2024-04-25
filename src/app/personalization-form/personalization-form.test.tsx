@@ -35,17 +35,17 @@ describe("PersonalizationForm", () => {
   });
 
   test('adds a new input field when "ADD A NEW PLACE" button is clicked', () => {
-    const placeHolderText = "Where have you lived?";
+    const testID = "place-lived";
     render(<PersonalizationForm />);
 
     const button = screen.getByText(/ADD A NEW PLACE/i);
 
-    const initialFields = screen.getAllByPlaceholderText(placeHolderText);
+    const initialFields = screen.getAllByTestId(testID);
     expect(initialFields).toHaveLength(3);
 
     fireEvent.click(button);
 
-    const fieldsAfterClick = screen.getAllByPlaceholderText(placeHolderText);
+    const fieldsAfterClick = screen.getAllByTestId(testID);
     expect(fieldsAfterClick).toHaveLength(4);
   });
 });

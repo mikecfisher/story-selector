@@ -14,7 +14,7 @@ export async function generateQuestions(questionData: LLMQuestionData) {
     The user has lived in ${questionData.placesLived}. They are interested in discussing topics such as ${questionData.interests}. 
     Note: The places lived and interests may not be directly related. 
     Avoid simple or direct associations like assuming educational events based on the location unless specified by the user.
-    Keep question length to 250 characters or less
+    Keep question length to 200 characters or less
     `;
 
     const response = await openai.chat.completions.create({
