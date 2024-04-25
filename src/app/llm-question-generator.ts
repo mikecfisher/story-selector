@@ -11,7 +11,7 @@ export async function generateQuestions(questionData: LLMQuestionData) {
   const prompt = `I have lived in ${questionData.placesLived} and I am interested in talking about ${questionData.interests}.`;
 
   const response = await openai.chat.completions.create({
-    model: "gpt-4-1106-preview",
+    model: "gpt-3.5-turbo",
     messages: [
       {
         role: "system",
