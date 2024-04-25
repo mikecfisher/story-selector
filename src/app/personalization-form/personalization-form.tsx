@@ -25,7 +25,8 @@ const PersonalizationForm: React.FC = () => {
               <input
                 key={field.id}
                 {...register(`placesLived.${index}.value`)}
-                className="w-full md:max-w-96 px-2 py-3 border border-gray-400 rounded-lg focus:border-[#068089] focus:outline-none "
+                className="sr-only w-full md:max-w-96 px-2 py-3 border border-gray-400 rounded-lg focus:border-[#068089] focus:outline-none "
+                placeholder="Where have you lived?"
               />
             ))}
             <p className="text-red-400">{errors.placesLived?.root?.message}</p>
