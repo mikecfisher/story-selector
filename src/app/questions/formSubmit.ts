@@ -3,11 +3,6 @@
 import { FormSchema, schema } from "../personalization-form/formSchema";
 import { generateQuestions } from "./llm-question-generator";
 
-export type FormState = {
-  message?: string | undefined;
-  data: string[] | undefined;
-};
-
 type QuestionResponse = string[];
 
 export async function onSubmitAction(
@@ -16,16 +11,16 @@ export async function onSubmitAction(
   const parsed = schema.safeParse(data);
 
   if (!parsed.success) {
-    //error
+    throw new Error("Invalid form data");
   }
 
   const flatPlaces =
     parsed.data?.placesLived
       .map((place) => place.value)
       .filter((place) => place?.trim() !== "")
-      .join(", ") || "";
+      .join(", ") ?? "";
 
-  const flatInterests = Object.entries(parsed.data?.topics || {})
+  const flatInterests = Object.entries(parsed.data?.topics ?? {})
     .filter(([topic, isSelected]) => isSelected)
     .map(([topic, isSelected]) => topic)
     .join(", ");
@@ -34,6 +29,10 @@ export async function onSubmitAction(
     placesLived: flatPlaces,
     interests: flatInterests,
   });
+
+  if (!response || typeof response === "string") {
+    throw new Error("Unexpected response from question generator");
+  }
 
   return response;
 }

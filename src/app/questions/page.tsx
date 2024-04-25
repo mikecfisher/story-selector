@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useQuestionsPage } from "./use-question-generation";
+import { useQuestionsGenerator } from "./use-question-generation";
 import { QuestionItem, QuestionLoading } from "./question-item";
 import { Button } from "@/components/ui/button";
 
@@ -12,7 +12,7 @@ const QuestionsPage = () => {
     selectedQuestion,
     handleQuestionSelect,
     error,
-  } = useQuestionsPage();
+  } = useQuestionsGenerator();
 
   if (error) {
     return <div>Error: {error}</div>;
